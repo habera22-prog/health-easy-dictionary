@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>생활건강 쉬운사전</title>
+  <style>
+    :root {
+      --base-font: 21px;
+      --bg: #f4f5f7;
+      --paper: #ffffff;
+      --text: #1f2328;
+      --muted: #646b73;
+      --line: #d8dde3;
+      --navy: #2f3742;
+      --navy2: #151a20;
+      --bluegray: #eef1f5;
+      --mint: #eef7f3;
+      --peach: #fff4ea;
+      --lavender: #f3f0fa;
+      --rose: #fff1f1;
+      --warning-bg: #fff8ee;
+      --warning-line: #efcf9c;
+      --danger: #b23b3b;
+      --danger-bg: #fff1f1;
+      --danger-line: #efc2c2;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans KR", "Apple SD Gothic Neo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: var(--base-font);
+      line-height: 1.68;
+      word-break: keep-all;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .hero {
+      background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+      border: 1px solid var(--line);
+      border-left: 8px solid var(--navy2);
+      border-radius: 4px;
+      padding: 28px;
+      margin-bottom: 16px;
+    }
+
+    .eyebrow {
+      color: var(--navy2);
+      font-size: 0.78em;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      color: var(--navy2);
+      font-size: 1.95em;
+      line-height: 1.22;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #3b4654;
+      font-size: 1.02em;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 14px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 10px rgba(92, 115, 145, 0.06);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+
+    .search-group {
+      display: grid;
+      grid-template-columns: minmax(320px, 1fr) 150px 110px;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .search-group input {
+      width: 100%;
+      min-height: 64px;
+      font-size: 1.05em;
+      padding: 15px 18px;
+      border-width: 2px;
+    }
+
+    .search-btn {
+      min-height: 64px;
+      font-size: 1.02em;
+      padding: 14px 18px;
+    }
+
+    .reset-btn {
+      min-height: 64px;
+      font-size: 0.95em;
+    }
+
+    input {
+      flex: 1;
+      min-width: 250px;
+      min-height: 54px;
+      border: 2px solid var(--line);
+      border-radius: 3px;
+      padding: 12px 15px;
+      font-size: 0.95em;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+    }
+
+    input:focus { border-color: var(--navy); }
+
+    button {
+      min-height: 54px;
+      border: 1px solid var(--navy);
+      border-radius: 3px;
+      padding: 12px 16px;
+      background: var(--navy2);
+      color: white;
+      font-size: 0.9em;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    button:hover { background: #000000; }
+
+    button.secondary {
+      background: #eef0f2;
+      color: var(--navy2);
+      border-color: #d6dfeb;
+    }
+
+    button.secondary:hover { background: #e6e8eb; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 270px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .side {
+      position: sticky;
+      top: 94px;
+      background: #fcfdff;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 16px;
+      box-shadow: 0 2px 10px rgba(92, 115, 145, 0.05);
+    }
+
+    .side h2 {
+      margin: 0 0 12px;
+      font-size: 1em;
+      color: var(--navy2);
+    }
+
+    .category-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .category-list button {
+      width: 100%;
+      text-align: left;
+      background: #fff;
+      color: var(--navy2);
+      border-color: var(--line);
+      padding: 11px 13px;
+      min-height: 48px;
+    }
+
+    .category-list button.active {
+      background: var(--navy2);
+      color: white;
+      border-color: var(--navy);
+    }
+
+
+    .category-list button.warning-cat {
+      color: #b04a4a;
+      background: #fff1f1;
+      border-color: #efc2c2;
+      font-weight: 900;
+    }
+
+    .category-list button.warning-cat:hover {
+      background: #fde7e7;
+    }
+
+    .category-list button.warning-cat.active {
+      background: #b04a4a;
+      color: #ffffff;
+      border-color: #b04a4a;
+    }
+
+    .notice {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 3px;
+      background: var(--warning-bg);
+      border-left: 4px solid #e5b66d;
+      border: 1px solid var(--warning-line);
+      color: #66451f;
+      font-size: 0.78em;
+      line-height: 1.58;
+    }
+
+    .main { min-width: 0; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .stat {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 16px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.35em;
+      line-height: 1.1;
+      color: var(--navy2);
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.76em;
+      font-weight: 800;
+    }
+
+    
+    .stats .stat:nth-child(1) { background: var(--mint); }
+    .stats .stat:nth-child(2) { background: var(--peach); }
+    .stats .stat:nth-child(3) { background: var(--lavender); }
+
+    .cards {
+      display: grid;
+      gap: 12px;
+    }
+
+    .term-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-left: 5px solid #c9d7e6;
+      border-radius: 4px;
+      padding: 20px;
+    }
+
+    .term-card.danger {
+      border-color: var(--danger-line);
+      background: var(--danger-bg);
+      border-left: 5px solid #df9c9c;
+    }
+
+    .meta {
+      display: inline-block;
+      font-size: 0.72em;
+      font-weight: 900;
+      color: var(--navy);
+      background: var(--bluegray);
+      padding: 5px 10px;
+      border-radius: 2px;
+      margin-bottom: 9px;
+    }
+
+    .danger .meta {
+      color: var(--danger);
+      background: #f7dfdc;
+    }
+
+    .term-title {
+      font-size: 1.38em;
+      line-height: 1.28;
+      font-weight: 950;
+      letter-spacing: -0.03em;
+      color: var(--navy2);
+      margin-bottom: 12px;
+    }
+
+    .danger .term-title { color: var(--danger); }
+
+    .desc {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .desc-block {
+      background: #fbfcfe;
+      border: 1px solid #e4e8ee;
+      border-radius: 3px;
+      padding: 14px;
+    }
+
+    .desc-block:nth-child(1) { background: #f7fbff; }
+    .desc-block:nth-child(2) { background: #fffaf5; }
+
+    .desc-block strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--navy2);
+      font-size: 0.82em;
+    }
+
+    .desc-block p {
+      margin: 0;
+      color: #303844;
+    }
+
+    .empty {
+      background: var(--paper);
+      border: 1px dashed var(--line);
+      border-radius: 4px;
+      padding: 34px;
+      text-align: center;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .source-note {
+      margin-top: 12px;
+      background: #fbfcfe;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 16px;
+      color: var(--muted);
+      font-size: 0.78em;
+      line-height: 1.6;
+    }
+
+    .brand {
+      text-align: center;
+      color: var(--muted);
+      margin-top: 18px;
+      font-size: 0.76em;
+    }
+
+    @media (max-width: 860px) {
+      .page { padding: 12px; }
+      .hero { padding: 20px; }
+      .toolbar { position: static; }
+      .layout { grid-template-columns: 1fr; }
+      .side { position: static; }
+      .stats { grid-template-columns: 1fr; }
+      .desc { grid-template-columns: 1fr; }
+      input { min-width: 100%; }
+      .search-group {
+        grid-template-columns: 1fr;
+      }
+      .search-group input,
+      .search-btn,
+      .reset-btn {
+        width: 100%;
+      }
+    }
+
+    @media print {
+      body { background: white; font-size: 16px; }
+      .toolbar, .side { display: none; }
+      .layout { display: block; }
+      .hero, .term-card, .stat, .source-note { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="eyebrow">건강정보 참고자료</div>
+      <h1>생활건강 쉬운사전</h1>
+      <p>건강검진표, 병원 표현, 자주 듣는 병명, 암 관련 표현, 검사·치료 용어, 약봉투 용어를 쉽게 찾아볼 수 있도록 정리했습니다.</p>
+    </section>
+
+    <div class="toolbar">
+      <div class="search-group">
+        <input id="searchInput" type="search" placeholder="검색어를 입력하세요. 예: 암, 혈압, 당뇨, CT, 약, 어지럼" onkeydown="handleSearchKey(event)" />
+        <button class="search-btn" onclick="render()">검색하기</button>
+        <button class="secondary reset-btn" onclick="clearSearch()">초기화</button>
+      </div>
+      <button onclick="changeFont(1)">글씨 크게 +4</button>
+      <button class="secondary" onclick="changeFont(-1)">글씨 작게 -4</button>
+      <button class="secondary" onclick="resetFont()">기본 크기</button>
+      <button class="secondary" onclick="window.print()">인쇄</button>
+    </div>
+
+    <div class="layout">
+      <aside class="side">
+        <h2>분류</h2>
+        <div id="categoryList" class="category-list"></div>
+        <div class="notice">
+          이 자료는 건강 정보를 쉽게 이해하기 위한 참고용입니다.<br>
+          진단, 치료, 약 복용 변경은 반드시 의사·약사와 상담해 주세요.
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="stats">
+          <div class="stat"><strong id="totalCount">0</strong><span>전체 용어</span></div>
+          <div class="stat"><strong id="visibleCount">0</strong><span>현재 표시</span></div>
+          <div class="stat"><strong id="fontSizeLabel">21px</strong><span>현재 글씨 크기</span></div>
+        </div>
+
+        <div id="cards" class="cards"></div>
+        <div id="empty" class="empty" style="display:none;">검색 결과가 없습니다.</div>
+
+        <div class="source-note">
+          참고: 공공 건강정보를 바탕으로 일상에서 이해하기 쉽게 풀어쓴 자료입니다.
+        </div>
+
+        <div class="brand">생활건강 쉬운사전</div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const DATA = [{"category": "건강검진표", "term": "혈압", "simple": "피가 혈관 벽을 미는 힘입니다.", "point": "너무 높으면 혈관과 심장에 부담이 될 수 있습니다."}, {"category": "건강검진표", "term": "수축기 혈압", "simple": "혈압 숫자 중 위에 있는 숫자입니다.", "point": "심장이 피를 내보낼 때의 압력입니다."}, {"category": "건강검진표", "term": "이완기 혈압", "simple": "혈압 숫자 중 아래에 있는 숫자입니다.", "point": "심장이 쉬는 순간의 압력입니다."}, {"category": "건강검진표", "term": "공복혈당", "simple": "밥을 먹지 않은 상태에서 잰 혈당입니다.", "point": "당뇨병 확인에 자주 쓰입니다."}, {"category": "건강검진표", "term": "당화혈색소", "simple": "최근 몇 달간 혈당 흐름을 보는 수치입니다.", "point": "하루 혈당보다 장기적인 혈당 관리를 볼 때 중요합니다."}, {"category": "건강검진표", "term": "콜레스테롤", "simple": "피 속에 있는 지방 성분입니다.", "point": "LDL, HDL, 중성지방을 함께 보는 것이 좋습니다."}, {"category": "건강검진표", "term": "LDL 콜레스테롤", "simple": "흔히 나쁜 콜레스테롤이라고 부르는 수치입니다.", "point": "높으면 혈관 건강에 부담이 될 수 있습니다."}, {"category": "건강검진표", "term": "HDL 콜레스테롤", "simple": "흔히 좋은 콜레스테롤이라고 부르는 수치입니다.", "point": "혈관 건강에 도움이 되는 방향으로 알려져 있습니다."}, {"category": "건강검진표", "term": "중성지방", "simple": "몸에 저장되는 지방 에너지입니다.", "point": "식습관, 음주, 체중과 관련이 많습니다."}, {"category": "건강검진표", "term": "간수치 AST/ALT", "simple": "간이 힘든지 보는 대표적인 혈액검사 수치입니다.", "point": "술, 약, 지방간, 간질환 등 여러 이유로 올라갈 수 있습니다."}, {"category": "건강검진표", "term": "감마지티피 r-GTP", "simple": "간과 담도 쪽 상태를 볼 때 참고하는 수치입니다.", "point": "음주와 관련되어 올라가는 경우가 많습니다."}, {"category": "건강검진표", "term": "크레아티닌", "simple": "신장 기능을 볼 때 자주 보는 수치입니다.", "point": "신장이 노폐물을 잘 걸러내는지 확인할 때 참고합니다."}, {"category": "건강검진표", "term": "요단백", "simple": "소변에 단백질이 나오는지 보는 검사입니다.", "point": "신장 건강 확인에 도움이 됩니다."}, {"category": "건강검진표", "term": "요산", "simple": "통풍과 관련 있는 수치입니다.", "point": "높다고 모두 통풍은 아니지만, 통증이 있으면 진료가 필요합니다."}, {"category": "건강검진표", "term": "혈색소", "simple": "피가 산소를 옮기는 능력과 관련된 수치입니다.", "point": "낮으면 빈혈 여부를 확인할 수 있습니다."}, {"category": "건강검진표", "term": "골밀도", "simple": "뼈가 얼마나 단단한지 보는 검사입니다.", "point": "골다공증 확인에 중요합니다."}, {"category": "건강검진표", "term": "BMI", "simple": "키와 몸무게로 계산하는 비만도입니다.", "point": "근육량은 반영하지 못하므로 참고용입니다."}, {"category": "병원에서 듣는 말", "term": "염증", "simple": "몸이 상처나 자극에 반응하는 상태입니다.", "point": "원인에 따라 치료가 달라집니다."}, {"category": "병원에서 듣는 말", "term": "급성", "simple": "갑자기 생긴 상태입니다.", "point": "빠르게 생겼다고 모두 위험한 것은 아니지만 확인이 필요합니다."}, {"category": "병원에서 듣는 말", "term": "만성", "simple": "오래 지속되는 상태입니다.", "point": "꾸준한 관리가 필요한 경우가 많습니다."}, {"category": "병원에서 듣는 말", "term": "부종", "simple": "몸이 붓는 상태입니다.", "point": "다리, 얼굴, 손이 붓는 경우 원인을 확인해야 합니다."}, {"category": "병원에서 듣는 말", "term": "빈혈", "simple": "피가 산소를 충분히 옮기지 못하는 상태입니다.", "point": "어지럼, 피로감과 관련될 수 있습니다."}, {"category": "병원에서 듣는 말", "term": "탈수", "simple": "몸에 수분이 부족한 상태입니다.", "point": "나이가 들수록 갈증을 덜 느껴도 탈수가 생길 수 있습니다."}, {"category": "병원에서 듣는 말", "term": "협착", "simple": "통로가 좁아졌다는 뜻입니다.", "point": "척추관 협착증처럼 신경이 지나가는 길이 좁아질 때도 씁니다."}, {"category": "병원에서 듣는 말", "term": "퇴행성", "simple": "나이가 들며 닳고 약해지는 변화입니다.", "point": "무릎, 허리, 목 관절에서 자주 듣는 말입니다."}, {"category": "병원에서 듣는 말", "term": "경과관찰", "simple": "당장 치료보다 상태를 지켜보자는 뜻입니다.", "point": "괜찮다는 말과 완전히 같은 뜻은 아닙니다."}, {"category": "병원에서 듣는 말", "term": "추적검사", "simple": "시간이 지난 뒤 다시 검사하자는 뜻입니다.", "point": "변화가 있는지 확인하기 위한 검사입니다."}, {"category": "병원에서 듣는 말", "term": "소견", "simple": "의사가 검사나 진찰 후 본 의견입니다.", "point": "진단명과 다를 수 있습니다."}, {"category": "병원에서 듣는 말", "term": "양성", "simple": "암이 아닌 쪽으로 보인다는 뜻으로 쓰일 때가 많습니다.", "point": "검사 종류에 따라 의미가 달라질 수 있어 설명을 들어야 합니다."}, {"category": "병원에서 듣는 말", "term": "악성", "simple": "암 가능성을 의심할 때 쓰는 말입니다.", "point": "추가 검사나 진료가 필요할 수 있습니다."}, {"category": "병원에서 듣는 말", "term": "조직검사", "simple": "몸의 일부 조직을 떼어 자세히 보는 검사입니다.", "point": "정확한 판단을 위해 시행하는 경우가 많습니다."}, {"category": "병원에서 듣는 말", "term": "재검", "simple": "다시 검사하자는 뜻입니다.", "point": "무조건 큰 병이라는 뜻은 아닙니다."}, {"category": "자주 듣는 병명", "term": "고혈압", "simple": "혈압이 높은 상태가 계속되는 병입니다.", "point": "증상이 없어도 혈관과 심장에 부담이 될 수 있어 꾸준한 관리가 중요합니다."}, {"category": "자주 듣는 병명", "term": "당뇨병", "simple": "혈당 조절이 잘 되지 않는 병입니다.", "point": "식사, 운동, 약 관리가 함께 필요합니다."}, {"category": "자주 듣는 병명", "term": "고지혈증", "simple": "피 속 지방 성분이 높은 상태입니다.", "point": "혈관 건강과 관련이 있어 검진 결과와 함께 관리가 필요합니다."}, {"category": "자주 듣는 병명", "term": "치매", "simple": "기억력과 판단력 같은 인지기능이 떨어져 일상생활에 지장이 생기는 상태입니다.", "point": "단순 건망증과 다를 수 있어 변화가 반복되면 상담을 받아보는 것이 좋습니다."}, {"category": "자주 듣는 병명", "term": "경도인지장애", "simple": "기억력이나 인지기능이 예전보다 떨어졌지만 일상생활은 어느 정도 가능한 상태입니다.", "point": "치매 전 단계일 수 있어 정기적인 확인이 중요합니다."}, {"category": "자주 듣는 병명", "term": "골다공증", "simple": "뼈가 약해져 잘 부러질 수 있는 상태입니다.", "point": "넘어졌을 때 골절 위험이 커지므로 낙상 예방이 중요합니다."}, {"category": "자주 듣는 병명", "term": "퇴행성관절염", "simple": "관절이 닳고 약해져 통증이 생기는 병입니다.", "point": "무릎, 손, 허리에서 흔하며 무리한 사용을 피하고 관리가 필요합니다."}, {"category": "자주 듣는 병명", "term": "백내장", "simple": "눈 속 수정체가 흐려져 시야가 뿌옇게 보이는 병입니다.", "point": "진행 정도에 따라 안과 진료와 수술을 고려할 수 있습니다."}, {"category": "자주 듣는 병명", "term": "녹내장", "simple": "눈의 신경이 손상되어 시야가 좁아질 수 있는 병입니다.", "point": "초기에 증상이 적을 수 있어 정기검진이 중요합니다."}, {"category": "자주 듣는 병명", "term": "뇌졸중", "simple": "뇌혈관이 막히거나 터져 생기는 병입니다.", "point": "갑작스러운 마비, 말 어눌함, 심한 두통은 바로 확인해야 합니다."}, {"category": "자주 듣는 병명", "term": "협심증", "simple": "심장 혈관이 좁아져 가슴 통증이 생길 수 있는 병입니다.", "point": "가슴 통증이 반복되거나 숨이 차면 진료가 필요합니다."}, {"category": "자주 듣는 병명", "term": "심근경색", "simple": "심장 혈관이 갑자기 막혀 심장 근육이 손상되는 병입니다.", "point": "심한 가슴 통증, 식은땀, 호흡곤란이 있으면 즉시 도움을 받아야 합니다."}, {"category": "자주 듣는 병명", "term": "파킨슨병", "simple": "움직임이 느려지고 손 떨림, 몸의 뻣뻣함 등이 나타날 수 있는 병입니다.", "point": "증상이 천천히 진행될 수 있어 신경과 진료가 도움이 됩니다."}, {"category": "자주 듣는 병명", "term": "전립선비대증", "simple": "전립선이 커져 소변 보기가 불편해지는 병입니다.", "point": "소변 줄기가 약해지거나 밤에 자주 깨면 진료를 받아보는 것이 좋습니다."}, {"category": "자주 듣는 병명", "term": "요실금", "simple": "소변이 의지와 상관없이 새는 증상입니다.", "point": "부끄러워 숨기기보다 원인을 확인하고 치료 방법을 상담하는 것이 좋습니다."}, {"category": "자주 듣는 병명", "term": "역류성 식도염", "simple": "위산이 식도로 올라와 속쓰림이나 목 이물감을 만드는 병입니다.", "point": "식사 습관, 자세, 약 치료가 도움이 될 수 있습니다."}, {"category": "자주 듣는 병명", "term": "만성폐쇄성폐질환", "simple": "폐 기능이 떨어져 숨이 차고 기침이 오래가는 병입니다.", "point": "흡연력이나 호흡곤란이 있으면 호흡기 진료가 필요합니다."}, {"category": "자주 듣는 병명", "term": "갑상선질환", "simple": "갑상선 호르몬이 너무 많거나 적어 몸의 대사에 영향을 주는 병입니다.", "point": "피로, 체중 변화, 심장 두근거림 등이 관련될 수 있습니다."}, {"category": "약봉투·약국", "term": "식전", "simple": "식사 전에 먹으라는 뜻입니다.", "point": "정확한 시간은 약사 안내를 따르는 것이 좋습니다."}, {"category": "약봉투·약국", "term": "식후", "simple": "식사 후에 먹으라는 뜻입니다.", "point": "위장 부담을 줄이기 위해 식후 복용하는 약도 많습니다."}, {"category": "약봉투·약국", "term": "취침 전", "simple": "잠자기 전에 먹으라는 뜻입니다.", "point": "졸림이 생기는 약은 특히 주의해야 합니다."}, {"category": "약봉투·약국", "term": "공복", "simple": "속이 빈 상태입니다.", "point": "약마다 공복 복용이 필요한 경우가 있습니다."}, {"category": "약봉투·약국", "term": "1일 3회", "simple": "하루 세 번 먹으라는 뜻입니다.", "point": "아침, 점심, 저녁으로 나눠 먹는 경우가 많습니다."}, {"category": "약봉투·약국", "term": "항생제", "simple": "세균 감염을 치료하기 위해 쓰는 약입니다.", "point": "임의로 끊거나 남은 약을 먹으면 안 됩니다."}, {"category": "약봉투·약국", "term": "소염진통제", "simple": "염증과 통증을 줄이는 약입니다.", "point": "위장, 신장, 출혈 위험 등 개인 상태에 따라 주의가 필요합니다."}, {"category": "약봉투·약국", "term": "진통제", "simple": "통증을 줄이는 약입니다.", "point": "같은 성분을 중복 복용하지 않도록 확인해야 합니다."}, {"category": "약봉투·약국", "term": "해열제", "simple": "열을 낮추는 약입니다.", "point": "감기약 안에도 들어 있는 경우가 있어 중복 복용에 주의해야 합니다."}, {"category": "약봉투·약국", "term": "위장약", "simple": "속쓰림, 위산, 소화 불편 등에 쓰는 약입니다.", "point": "다른 약과 복용 간격이 필요할 수 있습니다."}, {"category": "약봉투·약국", "term": "이뇨제", "simple": "소변을 더 나오게 하는 약입니다.", "point": "혈압, 심장, 부종 관리에 쓰이기도 합니다."}, {"category": "약봉투·약국", "term": "항응고제", "simple": "피가 너무 쉽게 굳지 않게 하는 약입니다.", "point": "출혈 위험 때문에 다른 약 복용 전 꼭 확인이 필요합니다."}, {"category": "약봉투·약국", "term": "부작용", "simple": "약을 먹고 원치 않게 생기는 반응입니다.", "point": "두드러기, 어지럼, 속쓰림 등이 있으면 상담해야 합니다."}, {"category": "약봉투·약국", "term": "상호작용", "simple": "약끼리 서로 영향을 주는 현상입니다.", "point": "여러 병원 약을 먹을 때 약사에게 꼭 알려야 합니다."}, {"category": "약봉투·약국", "term": "복약지도", "simple": "약사가 약 먹는 방법을 설명해주는 것입니다.", "point": "그냥 지나치지 말고 꼭 확인하는 것이 좋습니다."}, {"category": "생활건강", "term": "낙상", "simple": "넘어지는 사고입니다.", "point": "나이가 들수록 골절과 입원으로 이어질 수 있어 예방이 중요합니다."}, {"category": "생활건강", "term": "근감소증", "simple": "나이가 들며 근육량과 근력이 줄어드는 상태입니다.", "point": "걷기, 일어서기, 계단 오르기가 힘들어질 수 있습니다."}, {"category": "생활건강", "term": "보행장애", "simple": "걷는 데 어려움이 있는 상태입니다.", "point": "낙상 위험과 연결될 수 있습니다."}, {"category": "생활건강", "term": "어지럼증", "simple": "몸이 흔들리거나 빙글도는 느낌입니다.", "point": "반복되거나 심하면 진료가 필요합니다."}, {"category": "생활건강", "term": "기립성 저혈압", "simple": "일어설 때 혈압이 떨어져 어지러운 상태입니다.", "point": "갑자기 일어나지 않는 습관이 도움이 될 수 있습니다."}, {"category": "생활건강", "term": "변비", "simple": "대변을 보기 어렵거나 횟수가 줄어든 상태입니다.", "point": "수분, 식사량, 활동량, 약 영향과 관련될 수 있습니다."}, {"category": "생활건강", "term": "불면", "simple": "잠들기 어렵거나 자주 깨는 상태입니다.", "point": "오래 지속되면 생활 리듬과 건강에 영향을 줄 수 있습니다."}, {"category": "생활건강", "term": "식욕저하", "simple": "먹고 싶은 마음이 줄어든 상태입니다.", "point": "체중 감소와 영양 부족으로 이어질 수 있습니다."}, {"category": "생활건강", "term": "욕창", "simple": "오래 누워 있을 때 피부가 눌려 상처가 생기는 상태입니다.", "point": "거동이 불편한 경우 자세 변경이 중요합니다."}, {"category": "생활건강", "term": "치매안심센터", "simple": "지역에서 치매 상담, 검사 안내, 가족 지원 등을 받을 수 있는 기관입니다.", "point": "가까운 보건소나 치매안심센터를 통해 도움을 받을 수 있습니다."}, {"category": "생활건강", "term": "장기요양등급", "simple": "혼자 생활하기 어려운 정도에 따라 돌봄 서비스를 받을 수 있도록 판정하는 등급입니다.", "point": "거동 불편이나 인지기능 저하가 있으면 상담해볼 수 있습니다."}, {"category": "바로 확인할 신호", "term": "한쪽 팔·다리에 힘이 빠짐", "simple": "갑자기 한쪽 힘이 빠지는 증상입니다.", "point": "뇌졸중 같은 응급 상황 가능성이 있어 바로 확인이 필요합니다."}, {"category": "바로 확인할 신호", "term": "말이 갑자기 어눌해짐", "simple": "말이 잘 나오지 않거나 발음이 이상해지는 증상입니다.", "point": "뇌혈관 문제 신호일 수 있습니다."}, {"category": "바로 확인할 신호", "term": "심한 가슴 통증", "simple": "갑자기 가슴이 심하게 아픈 증상입니다.", "point": "심장 문제 가능성이 있어 즉시 진료가 필요합니다."}, {"category": "바로 확인할 신호", "term": "숨이 심하게 참", "simple": "평소와 다르게 숨쉬기 어려운 상태입니다.", "point": "호흡기, 심장 문제 등 여러 원인이 있을 수 있습니다."}, {"category": "바로 확인할 신호", "term": "의식이 흐려짐", "simple": "정신이 멍하거나 반응이 둔해지는 상태입니다.", "point": "응급 상황일 수 있습니다."}, {"category": "바로 확인할 신호", "term": "갑작스러운 심한 두통", "simple": "평소와 다른 매우 심한 두통입니다.", "point": "갑작스럽고 심하면 즉시 확인이 필요합니다."}, {"category": "바로 확인할 신호", "term": "검은 변 또는 피 섞인 변", "simple": "변 색이 검거나 피가 보이는 상태입니다.", "point": "위장관 출혈 가능성이 있어 진료가 필요합니다."}, {"category": "바로 확인할 신호", "term": "반복 구토", "simple": "구토가 여러 번 반복되는 상태입니다.", "point": "탈수와 전해질 문제로 이어질 수 있습니다."}, {"category": "바로 확인할 신호", "term": "고열과 의식 저하", "simple": "열이 높고 의식이 흐려지는 상태입니다.", "point": "감염 등 응급 상황 가능성이 있습니다."}, {"category": "바로 확인할 신호", "term": "넘어진 뒤 걷기 어려움", "simple": "낙상 후 통증이나 보행 어려움이 있는 상태입니다.", "point": "골절 가능성이 있어 확인이 필요합니다."}, {"category": "바로 확인할 신호", "term": "갑자기 심한 혼란이 생김", "simple": "갑자기 말과 행동이 혼란스러워지는 상태입니다.", "point": "섬망, 감염, 탈수, 약 영향 등 원인이 있을 수 있어 빠른 확인이 필요합니다."}, {"category": "병원에서 듣는 말", "term": "종양", "simple": "몸 안에 생긴 혹이나 덩어리를 말합니다.", "point": "종양이라고 해서 모두 암은 아니며, 양성인지 악성인지 확인이 필요할 수 있습니다."}, {"category": "병원에서 듣는 말", "term": "양성종양", "simple": "암이 아닌 종양을 말할 때 많이 쓰는 표현입니다.", "point": "대부분 암처럼 퍼지지는 않지만, 위치나 크기에 따라 치료가 필요할 수 있습니다."}, {"category": "병원에서 듣는 말", "term": "악성종양", "simple": "암을 뜻하는 표현으로 쓰이는 경우가 많습니다.", "point": "정확한 종류와 진행 정도에 따라 치료 방법이 달라집니다."}, {"category": "병원에서 듣는 말", "term": "전이", "simple": "암이 처음 생긴 곳을 벗어나 다른 부위로 퍼진 상태를 말합니다.", "point": "림프절이나 다른 장기로 퍼졌는지 확인하는 것이 치료 계획에 중요합니다."}, {"category": "병원에서 듣는 말", "term": "림프절", "simple": "몸의 면역과 관련된 작은 기관입니다.", "point": "암이나 감염이 있을 때 커지거나 검사 대상이 될 수 있습니다."}, {"category": "병원에서 듣는 말", "term": "병기", "simple": "암이 어느 정도 진행되었는지 나타내는 단계입니다.", "point": "보통 1기, 2기, 3기, 4기처럼 설명하며 치료 방향을 정할 때 중요합니다."}, {"category": "병원에서 듣는 말", "term": "재발", "simple": "치료 후 병이 다시 나타나는 것을 말합니다.", "point": "정기검사와 추적관찰이 중요한 이유입니다."}, {"category": "병원에서 듣는 말", "term": "관해", "simple": "암이나 병의 증거가 줄거나 보이지 않는 상태를 말합니다.", "point": "완치와 같은 뜻으로만 이해하기보다 담당의 설명을 함께 들어야 합니다."}, {"category": "병원에서 듣는 말", "term": "항암치료", "simple": "암세포를 줄이거나 자라지 못하게 하는 약물 치료입니다.", "point": "부작용과 치료 일정은 암 종류와 개인 상태에 따라 다릅니다."}, {"category": "병원에서 듣는 말", "term": "방사선치료", "simple": "방사선을 이용해 암세포를 줄이는 치료입니다.", "point": "치료 부위와 목적에 따라 기간과 부작용이 달라질 수 있습니다."}, {"category": "병원에서 듣는 말", "term": "표적치료", "simple": "암세포의 특정 특징을 겨냥하는 약물 치료입니다.", "point": "유전자 검사나 조직검사 결과에 따라 가능 여부가 달라질 수 있습니다."}, {"category": "병원에서 듣는 말", "term": "면역치료", "simple": "몸의 면역반응을 이용해 암을 치료하는 방법입니다.", "point": "모든 암에 쓰는 것은 아니며, 적용 가능 여부는 의료진 판단이 필요합니다."}, {"category": "자주 듣는 병명", "term": "암", "simple": "세포가 비정상적으로 자라 몸의 조직이나 장기에 문제를 일으키는 병입니다.", "point": "암의 종류, 위치, 진행 정도에 따라 치료와 경과가 크게 달라집니다."}, {"category": "자주 듣는 병명", "term": "위암", "simple": "위에 생기는 암입니다.", "point": "속쓰림이나 소화불량만으로 판단하기 어렵고, 검진과 내시경 확인이 중요합니다."}, {"category": "자주 듣는 병명", "term": "대장암", "simple": "대장에 생기는 암입니다.", "point": "대변 습관 변화, 혈변 등이 있으면 진료가 필요하며 검진이 중요합니다."}, {"category": "자주 듣는 병명", "term": "폐암", "simple": "폐에 생기는 암입니다.", "point": "기침, 객혈, 숨참이 오래가면 확인이 필요하고 흡연력도 중요한 참고 사항입니다."}, {"category": "자주 듣는 병명", "term": "유방암", "simple": "유방에 생기는 암입니다.", "point": "멍울, 피부 변화, 분비물 등이 있으면 진료가 필요합니다."}, {"category": "자주 듣는 병명", "term": "간암", "simple": "간에 생기는 암입니다.", "point": "간염, 간경변 등 기존 간질환이 있으면 정기검사가 중요합니다."}, {"category": "자주 듣는 병명", "term": "전립선암", "simple": "전립선에 생기는 암입니다.", "point": "초기 증상이 적을 수 있어 연령과 상태에 따라 검진 상담이 필요합니다."}, {"category": "자주 듣는 병명", "term": "갑상선암", "simple": "갑상선에 생기는 암입니다.", "point": "목의 결절로 발견되는 경우가 많고, 종류와 진행 정도에 따라 치료가 달라집니다."}, {"category": "자주 듣는 병명", "term": "대상포진", "simple": "몸 안에 남아 있던 바이러스가 다시 활동하면서 통증과 물집을 일으키는 병입니다.", "point": "통증이 심하거나 눈 주변에 생기면 빠른 진료가 필요합니다."}, {"category": "자주 듣는 병명", "term": "폐렴", "simple": "폐에 염증이 생기는 병입니다.", "point": "고열, 기침, 숨참, 기운 없음이 있으면 특히 주의가 필요합니다."}, {"category": "자주 듣는 병명", "term": "요로감염", "simple": "소변길에 세균 감염이 생긴 상태입니다.", "point": "소변 볼 때 통증, 잦은 소변, 열이 있으면 진료가 필요합니다."}, {"category": "자주 듣는 병명", "term": "신부전", "simple": "신장 기능이 떨어져 노폐물과 수분 조절이 어려워지는 상태입니다.", "point": "혈액검사와 소변검사로 확인하며, 약 복용에도 주의가 필요합니다."}, {"category": "자주 듣는 병명", "term": "심부전", "simple": "심장이 몸에 필요한 만큼 피를 충분히 보내지 못하는 상태입니다.", "point": "숨참, 다리 부종, 쉽게 피곤함이 반복되면 확인이 필요합니다."}, {"category": "자주 듣는 병명", "term": "부정맥", "simple": "심장 박동이 너무 빠르거나 느리거나 불규칙한 상태입니다.", "point": "두근거림, 어지럼, 실신 느낌이 있으면 진료가 필요합니다."}, {"category": "자주 듣는 병명", "term": "디스크", "simple": "척추 사이 구조물이 튀어나와 신경을 누를 수 있는 상태입니다.", "point": "허리나 목 통증, 다리 저림이 있을 수 있습니다."}, {"category": "자주 듣는 병명", "term": "척추관협착증", "simple": "신경이 지나가는 척추관이 좁아진 상태입니다.", "point": "걸을 때 다리가 저리거나 쉬면 나아지는 증상이 있을 수 있습니다."}, {"category": "자주 듣는 병명", "term": "수면무호흡증", "simple": "잠자는 동안 숨이 반복적으로 멈추거나 약해지는 상태입니다.", "point": "심한 코골이, 낮 졸림, 고혈압과 관련될 수 있습니다."}, {"category": "자주 듣는 병명", "term": "우울증", "simple": "기분 저하와 의욕 저하가 오래 지속되어 생활에 영향을 주는 병입니다.", "point": "마음의 문제라고만 넘기지 말고 치료와 상담이 도움이 될 수 있습니다."}, {"category": "자주 듣는 병명", "term": "불안장애", "simple": "걱정과 불안이 지나치게 커져 생활이 힘들어지는 상태입니다.", "point": "가슴 두근거림, 숨참, 불면과 함께 나타날 수 있습니다."}, {"category": "검사·치료 용어", "term": "내시경", "simple": "카메라가 달린 기구로 몸 안을 직접 보는 검사입니다.", "point": "위내시경, 대장내시경처럼 장기 안쪽을 확인할 때 사용합니다."}, {"category": "검사·치료 용어", "term": "초음파", "simple": "소리파동을 이용해 몸 안을 보는 검사입니다.", "point": "간, 담낭, 갑상선, 심장, 복부 등을 확인할 때 자주 쓰입니다."}, {"category": "검사·치료 용어", "term": "CT", "simple": "여러 방향에서 찍어 몸 안을 자세히 보는 영상검사입니다.", "point": "뼈, 장기, 혈관, 종양 등을 확인할 때 쓰입니다."}, {"category": "검사·치료 용어", "term": "MRI", "simple": "자기장을 이용해 몸 안을 자세히 보는 검사입니다.", "point": "뇌, 척추, 관절, 연부조직 확인에 자주 쓰입니다."}, {"category": "검사·치료 용어", "term": "X-ray", "simple": "방사선을 이용해 몸 안을 간단히 확인하는 검사입니다.", "point": "뼈, 폐, 흉부 상태를 확인할 때 흔히 사용합니다."}, {"category": "검사·치료 용어", "term": "조영제", "simple": "영상검사에서 혈관이나 장기를 더 잘 보이게 하는 약물입니다.", "point": "알레르기, 신장 기능 등을 확인한 뒤 사용하는 경우가 많습니다."}, {"category": "검사·치료 용어", "term": "심전도", "simple": "심장의 전기 신호를 기록하는 검사입니다.", "point": "부정맥, 흉통, 심장 이상 확인에 도움이 됩니다."}, {"category": "검사·치료 용어", "term": "채혈", "simple": "피를 뽑아 검사하는 것입니다.", "point": "간, 신장, 혈당, 빈혈, 염증 등 여러 상태를 확인합니다."}, {"category": "검사·치료 용어", "term": "소변검사", "simple": "소변으로 몸 상태를 확인하는 검사입니다.", "point": "요단백, 요당, 감염 여부 등을 볼 수 있습니다."}, {"category": "검사·치료 용어", "term": "생검", "simple": "조직 일부를 떼어 현미경으로 자세히 보는 검사입니다.", "point": "종양의 성격을 확인할 때 시행할 수 있습니다."}, {"category": "검사·치료 용어", "term": "수술", "simple": "몸의 병변을 직접 제거하거나 고치는 치료입니다.", "point": "수술 방법과 위험도는 병과 개인 상태에 따라 달라집니다."}, {"category": "검사·치료 용어", "term": "시술", "simple": "수술보다 작은 범위로 기구나 주사 등을 이용해 치료하는 경우가 많습니다.", "point": "스텐트, 내시경 치료, 주사 치료 등 종류가 다양합니다."}, {"category": "검사·치료 용어", "term": "스텐트", "simple": "좁아진 혈관이나 통로를 넓혀 유지하는 작은 기구입니다.", "point": "심장혈관, 담도, 혈관 등에 사용할 수 있습니다."}, {"category": "검사·치료 용어", "term": "재활치료", "simple": "기능 회복과 일상생활 복귀를 돕는 치료입니다.", "point": "뇌졸중, 골절, 수술 후, 근력 저하 등에 도움이 될 수 있습니다."}, {"category": "증상 표현", "term": "흉통", "simple": "가슴 통증을 말합니다.", "point": "갑작스럽고 심한 흉통, 식은땀, 숨참이 있으면 즉시 확인이 필요합니다."}, {"category": "증상 표현", "term": "호흡곤란", "simple": "숨쉬기 힘든 상태입니다.", "point": "심장, 폐, 감염 등 원인이 다양하므로 심하면 바로 진료가 필요합니다."}, {"category": "증상 표현", "term": "두근거림", "simple": "심장이 빠르게 뛰거나 불규칙하게 뛰는 느낌입니다.", "point": "어지럼, 흉통, 실신 느낌이 함께 있으면 확인이 필요합니다."}, {"category": "증상 표현", "term": "객혈", "simple": "기침할 때 피가 나오는 증상입니다.", "point": "폐나 기관지 문제일 수 있어 진료가 필요합니다."}, {"category": "증상 표현", "term": "혈변", "simple": "대변에 피가 섞여 나오는 상태입니다.", "point": "치질부터 장 질환까지 원인이 다양하므로 반복되면 확인이 필요합니다."}, {"category": "증상 표현", "term": "황달", "simple": "피부나 눈 흰자가 노랗게 보이는 상태입니다.", "point": "간, 담도, 혈액 문제와 관련될 수 있습니다."}, {"category": "증상 표현", "term": "저림", "simple": "손발이나 몸 일부가 찌릿하거나 감각이 둔한 느낌입니다.", "point": "신경, 혈액순환, 당뇨 합병증 등 원인이 다양합니다."}, {"category": "증상 표현", "term": "마비", "simple": "몸 일부에 힘이 빠지거나 움직이기 어려운 상태입니다.", "point": "갑자기 생기면 뇌졸중 가능성이 있어 즉시 확인해야 합니다."}, {"category": "증상 표현", "term": "실신", "simple": "잠깐 의식을 잃고 쓰러지는 상태입니다.", "point": "심장, 혈압, 신경 문제 등 원인이 있을 수 있어 확인이 필요합니다."}, {"category": "증상 표현", "term": "체중감소", "simple": "의도하지 않았는데 몸무게가 줄어드는 상태입니다.", "point": "식욕저하, 갑상선, 암, 만성질환 등 여러 원인이 있을 수 있습니다."}];
+    const rawCategories = Array.from(new Set(DATA.map(x => x.category)));
+    const orderedCategories = rawCategories.filter(x => x !== '바로 확인할 신호');
+    const CATEGORIES = ['전체', '바로 확인할 신호', ...orderedCategories.filter(x => x !== '바로 확인할 신호')];
+    let currentCategory = '전체';
+    const FONT_SIZES = [19, 23, 27, 31];
+    let fontSizeIndex = Number(localStorage.getItem('seniorHealthFontIndexV9') || 1);
+    let fontSize = FONT_SIZES[fontSizeIndex];
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    function applyFont() {
+      fontSize = FONT_SIZES[fontSizeIndex];
+      document.documentElement.style.setProperty('--base-font', fontSize + 'px');
+      document.getElementById('fontSizeLabel').textContent = fontSize + 'px';
+      localStorage.setItem('seniorHealthFontIndexV9', fontSizeIndex);
+    }
+
+    function changeFont(delta) {
+      fontSizeIndex = Math.max(0, Math.min(FONT_SIZES.length - 1, fontSizeIndex + delta));
+      applyFont();
+    }
+
+    function resetFont() {
+      fontSizeIndex = 1;
+      applyFont();
+    }
+
+    function setCategory(cat) {
+      currentCategory = cat;
+      renderCategoryList();
+      render();
+    }
+
+    function renderCategoryList() {
+      const box = document.getElementById('categoryList');
+      box.innerHTML = CATEGORIES.map(cat => {
+        const classes = [];
+        if (cat === currentCategory) classes.push('active');
+        if (cat === '바로 확인할 신호') classes.push('warning-cat');
+        return `
+        <button class="${classes.join(' ')}" onclick="setCategory('${cat}')">
+          ${escapeHtml(cat)}
+        </button>
+      `;
+      }).join('');
+    }
+
+    function render() {
+      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+
+      const filtered = DATA.filter(item => {
+        const categoryOk = currentCategory === '전체' || item.category === currentCategory;
+        const text = `${item.category} ${item.term} ${item.simple} ${item.point}`.toLowerCase();
+        return categoryOk && (!q || text.includes(q));
+      });
+
+      document.getElementById('totalCount').textContent = DATA.length;
+      document.getElementById('visibleCount').textContent = filtered.length;
+
+      const cards = document.getElementById('cards');
+      const empty = document.getElementById('empty');
+
+      if (!filtered.length) {
+        cards.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+      }
+
+      empty.style.display = 'none';
+      cards.innerHTML = filtered.map(item => {
+        const isDanger = item.category === '바로 확인할 신호';
+        return `
+          <article class="term-card ${isDanger ? 'danger' : ''}">
+            <div class="meta">${escapeHtml(item.category)}</div>
+            <div class="term-title">${escapeHtml(item.term)}</div>
+            <div class="desc">
+              <div class="desc-block">
+                <strong>쉽게 말하면</strong>
+                <p>${escapeHtml(item.simple)}</p>
+              </div>
+              <div class="desc-block">
+                <strong>꼭 기억할 점</strong>
+                <p>${escapeHtml(item.point)}</p>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function handleSearchKey(event) {
+      if (event.key === 'Enter') {
+        render();
+      }
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      render();
+    }
+
+    applyFont();
+    renderCategoryList();
+    render();
+  </script>
+</body>
+</html>
