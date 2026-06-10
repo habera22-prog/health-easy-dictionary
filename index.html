@@ -457,21 +457,22 @@
   }
 
   .category-list {
-    display: flex;
-    gap: 6px;
-    overflow-x: auto;
-    padding-bottom: 3px;
-    -webkit-overflow-scrolling: touch;
-  }
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  overflow: visible;
+  padding-bottom: 0;
+}
 
-  .category-list button {
-    flex: 0 0 auto;
-    white-space: nowrap;
-    font-size: 0.72em;
-    padding: 8px 10px;
-    min-height: 36px;
-    line-height: 1.15;
-  }
+.category-list button {
+  width: 100%;
+  white-space: normal;
+  font-size: 0.72em;
+  padding: 8px 6px;
+  min-height: 36px;
+  line-height: 1.15;
+  text-align: center;
+}
 
   .notice {
     display: none;
