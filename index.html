@@ -16,7 +16,7 @@
   
   <style>
     :root {
-      --base-font: 21px;
+      --base-font: 18px;
       --bg: #f4f5f7;
       --paper: #ffffff;
       --text: #1f2328;
@@ -376,47 +376,68 @@
     }
 
   @media (max-width: 860px) {
+  body {
+    line-height: 1.55;
+  }
+
   .page {
-    padding: 10px;
+    padding: 8px;
   }
 
   .hero {
-    padding: 18px;
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+
+  .eyebrow {
+    font-size: 0.7em;
+    margin-bottom: 4px;
   }
 
   .hero h1 {
-    font-size: 1.55em;
+    font-size: 1.42em;
+    margin-bottom: 6px;
+    letter-spacing: -0.04em;
   }
 
   .hero p {
-    font-size: 0.9em;
+    font-size: 0.86em;
+    line-height: 1.5;
   }
 
   .toolbar {
     position: static;
-    padding: 12px;
+    padding: 10px;
+    gap: 8px;
+    margin-bottom: 10px;
   }
 
   .search-group {
-    grid-template-columns: 1fr;
-    gap: 8px;
+    grid-template-columns: 1fr 88px 62px;
+    gap: 6px;
+    width: 100%;
   }
 
-  .search-group input,
+  .search-group input {
+    min-height: 44px;
+    font-size: 0.9em;
+    padding: 9px 10px;
+  }
+
   .search-btn,
   .reset-btn {
-    width: 100%;
-    min-height: 56px;
+    min-height: 44px;
+    font-size: 0.82em;
+    padding: 8px 6px;
   }
 
-  .toolbar > button,
-  .toolbar .secondary {
-    min-height: 48px;
-    padding: 10px 12px;
-    font-size: 0.85em;
+  .toolbar > button {
+    flex: 1 1 calc(25% - 8px);
+    min-height: 40px;
+    padding: 8px 6px;
+    font-size: 0.78em;
   }
 
-  /* 모바일에서는 좌측 메뉴를 위쪽 가로 메뉴로 변경 */
   .layout {
     display: block;
   }
@@ -425,32 +446,31 @@
     position: sticky;
     top: 0;
     z-index: 9;
-    margin-bottom: 12px;
-    padding: 12px;
+    margin-bottom: 10px;
+    padding: 10px;
     background: #ffffff;
     border: 1px solid var(--line);
   }
 
   .side h2 {
-    font-size: 0.95em;
-    margin: 0 0 8px;
+    display: none;
   }
 
   .category-list {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     overflow-x: auto;
-    padding-bottom: 4px;
+    padding-bottom: 3px;
     -webkit-overflow-scrolling: touch;
   }
 
   .category-list button {
     flex: 0 0 auto;
     white-space: nowrap;
-    font-size: 0.78em;
-    padding: 10px 12px;
-    min-height: 42px;
-    line-height: 1.2;
+    font-size: 0.72em;
+    padding: 8px 10px;
+    min-height: 36px;
+    line-height: 1.15;
   }
 
   .notice {
@@ -462,36 +482,68 @@
   }
 
   .stats {
-    grid-template-columns: 1fr;
-    gap: 8px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-bottom: 10px;
   }
 
   .stat {
-    padding: 12px;
+    padding: 9px 8px;
+  }
+
+  .stat strong {
+    font-size: 1em;
+  }
+
+  .stat span {
+    font-size: 0.58em;
   }
 
   .cards {
-    gap: 10px;
+    gap: 9px;
   }
 
   .term-card {
-    padding: 14px;
+    padding: 12px;
+    border-left-width: 4px;
+  }
+
+  .meta {
+    font-size: 0.62em;
+    padding: 4px 7px;
+    margin-bottom: 7px;
   }
 
   .term-title {
     font-size: 1.12em;
+    margin-bottom: 8px;
   }
 
   .desc {
     grid-template-columns: 1fr;
+    gap: 7px;
   }
 
   .desc-block {
-    padding: 12px;
+    padding: 10px;
+  }
+
+  .desc-block strong {
+    font-size: 0.74em;
+  }
+
+  .desc-block p {
+    font-size: 0.86em;
+    line-height: 1.5;
   }
 
   .source-note {
-    font-size: 0.72em;
+    font-size: 0.68em;
+    padding: 12px;
+  }
+
+  .brand {
+    font-size: 0.66em;
   }
 }
 
@@ -517,8 +569,8 @@
         <button class="search-btn" onclick="render()">검색하기</button>
         <button class="secondary reset-btn" onclick="clearSearch()">초기화</button>
       </div>
-      <button onclick="changeFont(1)">글씨 크게 +4</button>
-      <button class="secondary" onclick="changeFont(-1)">글씨 작게 -4</button>
+      <button onclick="changeFont(1)">글씨 크게</button>
+      <button class="secondary" onclick="changeFont(-1)">글씨 작게</button>
       <button class="secondary" onclick="resetFont()">기본 크기</button>
       <button class="secondary" onclick="window.print()">인쇄</button>
     </div>
@@ -558,7 +610,7 @@
     const orderedCategories = rawCategories.filter(x => x !== '바로 확인할 신호');
     const CATEGORIES = ['전체', '바로 확인할 신호', ...orderedCategories.filter(x => x !== '바로 확인할 신호')];
     let currentCategory = '전체';
-    const FONT_SIZES = [19, 23, 27, 31];
+    const FONT_SIZES = [16, 18, 20, 22];
     let fontSizeIndex = Number(localStorage.getItem('seniorHealthFontIndexV9') || 1);
     let fontSize = FONT_SIZES[fontSizeIndex];
 
