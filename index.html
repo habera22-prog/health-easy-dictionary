@@ -375,7 +375,7 @@
       font-size: 0.76em;
     }
 
-   @media (max-width: 860px) {
+  @media (max-width: 860px) {
   .page {
     padding: 10px;
   }
@@ -384,38 +384,73 @@
     padding: 18px;
   }
 
-  .toolbar {
-    position: static;
+  .hero h1 {
+    font-size: 1.55em;
   }
 
-  /* 모바일에서도 좌측 분류 + 우측 본문 구조 유지 */
+  .hero p {
+    font-size: 0.9em;
+  }
+
+  .toolbar {
+    position: static;
+    padding: 12px;
+  }
+
+  .search-group {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .search-group input,
+  .search-btn,
+  .reset-btn {
+    width: 100%;
+    min-height: 56px;
+  }
+
+  .toolbar > button,
+  .toolbar .secondary {
+    min-height: 48px;
+    padding: 10px 12px;
+    font-size: 0.85em;
+  }
+
+  /* 모바일에서는 좌측 메뉴를 위쪽 가로 메뉴로 변경 */
   .layout {
-    grid-template-columns: 115px 1fr;
-    gap: 10px;
-    align-items: start;
+    display: block;
   }
 
   .side {
     position: sticky;
-    top: 8px;
-    padding: 10px;
+    top: 0;
+    z-index: 9;
+    margin-bottom: 12px;
+    padding: 12px;
+    background: #ffffff;
+    border: 1px solid var(--line);
   }
 
   .side h2 {
-    font-size: 0.9em;
-    margin-bottom: 8px;
+    font-size: 0.95em;
+    margin: 0 0 8px;
   }
 
   .category-list {
-    gap: 6px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
   }
 
   .category-list button {
-    font-size: 0.68em;
-    padding: 8px 7px;
-    min-height: 38px;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    font-size: 0.78em;
+    padding: 10px 12px;
+    min-height: 42px;
     line-height: 1.2;
-    word-break: keep-all;
   }
 
   .notice {
@@ -435,22 +470,8 @@
     padding: 12px;
   }
 
-  .desc {
-    grid-template-columns: 1fr;
-  }
-
-  input {
-    min-width: 100%;
-  }
-
-  .search-group {
-    grid-template-columns: 1fr;
-  }
-
-  .search-group input,
-  .search-btn,
-  .reset-btn {
-    width: 100%;
+  .cards {
+    gap: 10px;
   }
 
   .term-card {
@@ -458,7 +479,11 @@
   }
 
   .term-title {
-    font-size: 1.08em;
+    font-size: 1.12em;
+  }
+
+  .desc {
+    grid-template-columns: 1fr;
   }
 
   .desc-block {
