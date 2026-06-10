@@ -413,23 +413,29 @@
   }
 
   .search-group {
-    grid-template-columns: 1fr 88px 62px;
-    gap: 6px;
-    width: 100%;
-  }
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  width: 100%;
+}
 
-  .search-group input {
-    min-height: 44px;
-    font-size: 0.9em;
-    padding: 9px 10px;
-  }
+.search-group input {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  font-size: 0.9em;
+  padding: 9px 10px;
+}
 
-  .search-btn,
-  .reset-btn {
-    min-height: 44px;
-    font-size: 0.82em;
-    padding: 8px 6px;
-  }
+.search-btn,
+.reset-btn {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  font-size: 0.82em;
+  padding: 8px 6px;
+}
 
   .toolbar > button {
     flex: 1 1 calc(25% - 8px);
