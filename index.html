@@ -376,24 +376,33 @@
     }
 
    @media (max-width: 860px) {
-  .page { padding: 10px; }
-  .hero { padding: 18px; }
-  .toolbar { position: static; }
+  .page {
+    padding: 10px;
+  }
 
-  /* 핵심: 모바일에서도 좌측 메뉴 + 본문 2열 유지 */
+  .hero {
+    padding: 18px;
+  }
+
+  .toolbar {
+    position: static;
+  }
+
+  /* 모바일에서도 좌측 분류 + 우측 본문 구조 유지 */
   .layout {
-    grid-template-columns: 110px 1fr;
+    grid-template-columns: 115px 1fr;
     gap: 10px;
     align-items: start;
   }
 
   .side {
-    position: static;
+    position: sticky;
+    top: 8px;
     padding: 10px;
   }
 
   .side h2 {
-    font-size: 0.95em;
+    font-size: 0.9em;
     margin-bottom: 8px;
   }
 
@@ -402,14 +411,28 @@
   }
 
   .category-list button {
-    font-size: 0.72em;
-    padding: 9px 8px;
-    min-height: 40px;
+    font-size: 0.68em;
+    padding: 8px 7px;
+    min-height: 38px;
     line-height: 1.2;
+    word-break: keep-all;
+  }
+
+  .notice {
+    display: none;
+  }
+
+  .main {
+    min-width: 0;
   }
 
   .stats {
     grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .stat {
+    padding: 12px;
   }
 
   .desc {
@@ -435,7 +458,15 @@
   }
 
   .term-title {
-    font-size: 1.1em;
+    font-size: 1.08em;
+  }
+
+  .desc-block {
+    padding: 12px;
+  }
+
+  .source-note {
+    font-size: 0.72em;
   }
 }
 
